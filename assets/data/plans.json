@@ -1,0 +1,33 @@
+{
+    "popular": [
+        { "name": "NOVA Unlimited", "price": "299", "validity": "28 Days", "data": "2GB/day", "call": "Unlimited", "benefits": "Free SMS", "badge": "Best Seller" },
+        { "name": "NOVA Unlimited", "price": "199", "validity": "28 Days", "data": "5GB/day", "call": "Unlimited", "benefits": "100/DAY", "badge": "Popular" },
+        { "name": "NOVA Unlimited", "price": "299", "validity": "28 Days", "data": "2GB/day", "call": "Unlimited", "benefits": "Free SMS", "badge": "New" },
+        { "name": "NOVA Unlimited", "price": "299", "validity": "1 Days", "data": "2GB/day", "call": "Unlimited", "benefits": "100/DAY", "badge": "Limited Offer" },
+        { "name": "NOVA Unlimited", "price": "399", "validity": "2 Days", "data": "2GB/day", "call": "Unlimited", "benefits": "Free SMS", "badge": "Best Value" },
+        { "name": "NOVA Unlimited", "price": "30", "validity": "28 Days", "data": "2GB/day", "call": "Unlimited", "benefits": "100/DAY", "badge": "Discount" },
+        { "name": "NOVA Unlimited", "price": "22", "validity": "5 Days", "data": "2GB/day", "call": "Unlimited", "benefits": "Free SMS", "badge": "Special" }
+    ],
+    "validity": [
+        { "name": "NOVA Validity", "price": "199", "validity": "56 Days", "data": "1GB/day", "call": "Unlimited", "benefits": "Free SMS" },
+        { "name": "NOVA Validity", "price": "299", "validity": "84 Days", "data": "1.5GB/day", "call": "Unlimited", "benefits": "Free SMS" },
+        { "name": "NOVA Validity", "price": "399", "validity": "365 Days", "data": "2GB/day", "call": "Unlimited", "benefits": "Free SMS" }
+    ],
+    "data": [
+        { "name": "NOVA Data", "price": "99", "validity": "28 Days", "data": "3GB/day", "call": "Unlimited", "benefits": "Free SMS" },
+        { "name": "NOVA Data", "price": "149", "validity": "56 Days", "data": "2GB/day", "call": "Unlimited", "benefits": "Free SMS" },
+        { "name": "NOVA Data", "price": "199", "validity": "84 Days", "data": "1.5GB/day", "call": "Unlimited", "benefits": "Free SMS" }
+    ],
+    "unlimited": [
+        { "name": "NOVA Unlimited Plus", "price": "399", "validity": "84 Days", "data": "2GB/day", "call": "Unlimited", "benefits": "Free SMS" }
+    ],
+    "summer": [
+        { "name": "NOVA Summer", "price": "299", "validity": "28 Days", "data": "2GB/day", "call": "Unlimited", "benefits": "Free SMS" }
+    ],
+    "5g-unlimited": [
+        { "name": "NOVA 5G Unlimited", "price": "499", "validity": "28 Days", "data": "5GB/day", "call": "Unlimited", "benefits": "Free SMS" }
+    ],
+    "entertainment": [
+        { "name": "NOVA Entertainment", "price": "399", "validity": "28 Days", "data": "2GB/day", "call": "Unlimited", "benefits": "Free SMS + Netflix" }
+    ]
+}

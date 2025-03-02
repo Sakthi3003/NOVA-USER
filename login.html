@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova - Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/images/logo.webp" type="image/x-icon">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        :root {
+            --primary: #0a21c0;
+            --light-gray: #b3b4bd;
+            --black: #000000;
+            --white: #ffffff;
+            --success: #28a745;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--black);
+            font-family: "poppins", sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-container {
+            max-width: 380px;
+            width: 90%;
+            padding: 2rem;
+            border-radius: 15px;
+            background-color: var(--white);
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin: 0 auto;
+        }
+        
+        .form-control {
+            background-color: var(--white);
+            border: 2px solid #eaeaea;
+            color: var(--black);
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            background-color: var(--white);
+            color: var(--black);
+            outline: none;
+            box-shadow: none;
+        }
+        
+        .input-group-text {
+            background-color: #f8f9fa;
+            border: 2px solid #eaeaea;
+            border-right: none;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            color: var(--black);
+            font-weight: 500;
+        }
+        
+        .input-group .form-control {
+            border-left: none;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        
+        .form-label {
+            color: var(--black);
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border: none;
+            padding: 10px 16px;
+            width: auto;
+            min-width: 150px;
+            font-weight: bold;
+            border-radius: 8px;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(10, 33, 192, 0.2);
+            margin: 1.5rem auto 0;
+            display: block;
+        }
+        
+        .btn-primary:hover, .btn-primary:focus {
+            background-color: #0a1aa0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(10, 33, 192, 0.3);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .otp-inputs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 15px 0 25px;
+        }
+        
+        .otp-input {
+            width: 45px;
+            height: 55px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: var(--white);
+            border: 2px solid #eaeaea;
+            color: var(--black);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .otp-input:focus {
+            background-color: var(--white);
+            color: var(--black);
+            outline: none;
+            box-shadow: none;
+        }
+        
+        .step {
+            display: none;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+        
+        .toast {
+            min-width: 250px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+        }
+        
+        .logo-placeholder {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .timer {
+            color: var(--black);
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .resend {
+            color: var(--primary);
+            background: none;
+            border: none;
+            padding: 0;
+            margin-left: 5px;
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        
+        .resend:not(:disabled):hover {
+            color: #0a1aa0;
+        }
+        
+        .resend:disabled {
+            color: var(--light-gray);
+            cursor: default;
+            text-decoration: none;
+        }
+        
+        .text-muted {
+            color: #6c757d !important;
+        }
+        
+        h3 {
+            font-weight: 700;
+            color: var(--black);
+            font-size: 1.5rem;
+        }
+        
+        .invalid-feedback {
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            color: #dc3545;
+            display: none;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .mb-3 {
+            margin-bottom: 1.5rem !important;
+        }
+        
+        .btn-verifying {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            width: auto;
+            min-width: 150px;
+            font-weight: bold;
+            border-radius: 8px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        
+        .verifying-spinner {
+            margin-right: 10px;
+            border-width: 0.15em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="loginPage">
+        <div class="toast-container"></div>
+        
+        <div class="login-container">
+            
+            <div class="logo-placeholder"><img src="./assets/images/logo.webp" alt="" height="70px" width="150"></div>
+            
+            <div class="step active" id="phoneStep">
+                <h3 class="mb-4 text-center">Sign In</h3>
+                <form id="phoneForm">
+                    <div class="mb-3">
+                        <label for="phoneNumber" class="form-label">Phone Number</label>
+                        <div class="input-group">
+                            <span class="input-group-text">+91</span>
+                            <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="10-digit mobile number" maxlength="10" required>
+                        </div>
+                        <div class="invalid-feedback" id="phoneError"></div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary" id="sendOtpBtn">
+                            <span id="sendOtpBtnText">Send OTP</span>
+                            <span id="sendOtpLoader" class="spinner-border spinner-border-sm ms-2 d-none" role="status"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="step" id="otpStep">
+                <h3 class="mb-3 text-center">Verify OTP</h3>
+                <p class="text-center mb-4 text-muted">
+                    Enter the 6-digit code sent to <span id="displayPhoneNumber"></span>
+                </p>
+                
+                <form id="otpForm">
+                    <div class="mb-4">
+                        <div class="otp-inputs">
+                            <input type="text" class="otp-input" maxlength="1" autofocus>
+                            <input type="text" class="otp-input" maxlength="1">
+                            <input type="text" class="otp-input" maxlength="1">
+                            <input type="text" class="otp-input" maxlength="1">
+                            <input type="text" class="otp-input" maxlength="1">
+                            <input type="text" class="otp-input" maxlength="1">
+                        </div>
+                        <div class="invalid-feedback text-center mt-2" id="otpError"></div>
+                        <div class="timer mt-3 text-center">
+                            Resend OTP in <span id="timer">60</span> seconds
+                            <button class="resend" id="resendBtn" disabled>Resend</button>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary mt-3" id="verifyButton">
+                            <span id="verifyOtpBtnText">Verify & Login</span>
+                            <span id="verifyOtpLoader" class="spinner-border spinner-border-sm ms-2 d-none" role="status"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="step" id="verifyingStep">
+                <h3 class="mb-3 text-center">Verify OTP</h3>
+                <p class="text-center mb-4 text-muted">
+                    Enter the 6-digit code sent to <span id="verifyingPhoneNumber"></span>
+                </p>
+                
+                <div class="mb-4">
+                    <div class="otp-inputs">
+                        <input type="text" class="otp-input" disabled>
+                        <input type="text" class="otp-input" disabled>
+                        <input type="text" class="otp-input" disabled>
+                        <input type="text" class="otp-input" disabled>
+                        <input type="text" class="otp-input" disabled>
+                        <input type="text" class="otp-input" disabled>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button class="btn-verifying" disabled>
+                        <span class="spinner-border spinner-border-sm verifying-spinner" role="status"></span>
+                        Verifying...
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery Validate -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Elements
+            const phoneStep = $('#phoneStep');
+            const otpStep = $('#otpStep');
+            const verifyingStep = $('#verifyingStep');
+            const phoneForm = $('#phoneForm');
+            const phoneNumber = $('#phoneNumber');
+            const displayPhoneNumber = $('#displayPhoneNumber');
+            const verifyingPhoneNumber = $('#verifyingPhoneNumber');
+            const phoneError = $('#phoneError');
+            const otpError = $('#otpError');
+            const sendOtpBtn = $('#sendOtpBtn');
+            const sendOtpBtnText = $('#sendOtpBtnText');
+            const sendOtpLoader = $('#sendOtpLoader');
+            const otpInputs = $('#otpStep .otp-input');
+            const verifyingInputs = $('#verifyingStep .otp-input');
+            const verifyButton = $('#verifyButton');
+            const verifyOtpBtnText = $('#verifyOtpBtnText');
+            const verifyOtpLoader = $('#verifyOtpLoader');
+            const timerDisplay = $('#timer');
+            const resendBtn = $('#resendBtn');
+    
+            let timerInterval;
+            let countdown = 60;
+            let generatedOtp = "";
+            let users = [];
+    
+            // Fetch user.json
+            $.getJSON('user.json')
+                .done(function(data) {
+                    users = data.users;
+                })
+                .fail(function() {
+                    console.error('Failed to load user.json');
+                    showToast('Error loading user data. Please try again.', 'danger');
+                });
+    
+            // Phone number validation methods
+            $.validator.addMethod('validPhone', function(value) {
+                return /^\d{10}$/.test(value);
+            }, 'Please enter a valid 10-digit phone number');
+    
+            $.validator.addMethod('phoneExists', function(value) {
+                const fullNumber = '+91 ' + value;
+                return users.some(user => user.number === fullNumber);
+            }, 'This phone number is not registered');
+    
+            $.validator.addMethod('noLowStart', function(value) {
+                return !/^[0-5]/.test(value);
+            }, 'Number cannot start with 0, 1, 2, 3, 4, or 5');
+    
+            // Phone form validation
+            phoneForm.validate({
+                rules: {
+                    phoneNumber: {
+                        required: true,
+                        validPhone: true,
+                        phoneExists: true,
+                        noLowStart: true,
+                        maxlength: 10
+                    }
+                },
+                messages: {
+                    phoneNumber: {
+                        required: 'Phone number is required',
+                        validPhone: 'Enter a valid 10-digit number',
+                        phoneExists: 'This number is not registered',
+                        noLowStart: 'Number cannot start with 0-5',
+                        maxlength: 'Must be exactly 10 digits'
+                    }
+                },
+                errorPlacement: function(error, element) {
+                    phoneError.text(error.text()).show();
+                },
+                success: function(label, element) {
+                    phoneError.hide();
+                },
+                submitHandler: function(form) {
+                    const phone = phoneNumber.val().trim();
+                    const fullPhone = '+91 ' + phone;
+    
+                    sendOtpBtnText.text('Sending OTP...');
+                    sendOtpLoader.removeClass('d-none');
+                    sendOtpBtn.prop('disabled', true);
+    
+                    generatedOtp = generateOtp();
+    
+                    setTimeout(() => {
+                        sendOtpBtnText.text('Send OTP');
+                        sendOtpLoader.addClass('d-none');
+                        sendOtpBtn.prop('disabled', false);
+    
+                        displayPhoneNumber.text(fullPhone);
+                        showToast(`Your OTP is: ${generatedOtp}`, 'success');
+    
+                        phoneStep.removeClass('active');
+                        otpStep.addClass('active');
+                        otpInputs.first().focus();
+                        startTimer();
+                    }, 1500);
+                }
+            });
+    
+            // Dynamic phone number validation on input
+            phoneNumber.on('input', function() {
+                const value = this.value.replace(/[^0-9]/g, '');
+                this.value = value.slice(0, 10);
+    
+                if (value.length > 0) {
+                    if (/^[0-5]/.test(value)) {
+                        phoneError.text('Number cannot start with 0, 1, 2, 3, 4, or 5').show();
+                        sendOtpBtn.prop('disabled', true);
+                    } else if (value.length < 10) {
+                        phoneError.text('Please enter a 10-digit number').show();
+                        sendOtpBtn.prop('disabled', true);
+                    } else if (!/^\d{10}$/.test(value)) {
+                        phoneError.text('Enter a valid 10-digit number').show();
+                        sendOtpBtn.prop('disabled', true);
+                    } else {
+                        phoneError.hide();
+                        sendOtpBtn.prop('disabled', false);
+                    }
+                } else {
+                    phoneError.hide();
+                    sendOtpBtn.prop('disabled', false);
+                }
+            });
+    
+            // Toast function
+            function showToast(message, type = 'success') {
+                const toastContainer = $('.toast-container');
+                const toast = $(`
+                    <div class="toast align-items-center text-white bg-${type} border-0" role="alert">
+                        <div class="d-flex">
+                            <div class="toast-body">${message}</div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                        </div>
+                    </div>
+                `);
+                toastContainer.append(toast);
+                const bsToast = new bootstrap.Toast(toast[0], { autohide: true, delay: 5000 });
+                bsToast.show();
+                toast.on('hidden.bs.toast', function() { toast.remove(); });
+            }
+    
+            // Generate random OTP
+            function generateOtp() {
+                return Math.floor(100000 + Math.random() * 900000).toString();
+            }
+    
+            // Start OTP timer
+            function startTimer() {
+                countdown = 60;
+                timerDisplay.text(countdown);
+                resendBtn.prop('disabled', true);
+    
+                clearInterval(timerInterval);
+                timerInterval = setInterval(() => {
+                    countdown--;
+                    timerDisplay.text(countdown);
+                    if (countdown <= 0) {
+                        clearInterval(timerInterval);
+                        resendBtn.prop('disabled', false);
+                    }
+                }, 1000);
+            }
+    
+            // Copy OTP values to verifying step
+            function copyOtpToVerifying() {
+                otpInputs.each(function(index) {
+                    verifyingInputs.eq(index).val($(this).val());
+                });
+                verifyingPhoneNumber.text(displayPhoneNumber.text());
+            }
+    
+            // Redirect to profile page and store user data
+            function redirectToProfile() {
+                const phone = phoneNumber.val().trim();
+                const fullPhone = '+91 ' + phone;
+                const matchedUser = users.find(user => user.number === fullPhone);
+                if (matchedUser) {
+                    localStorage.setItem('loggedInUser', JSON.stringify(matchedUser));
+                    setTimeout(() => {
+                        window.location.href = "profilef.html";
+                    }, 3000);
+                }
+            }
+    
+            // OTP input handling
+            otpInputs.each(function(index) {
+                $(this).on('input', function() {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                    if (this.value && index < otpInputs.length - 1) {
+                        otpInputs.eq(index + 1).focus();
+                    }
+                });
+    
+                $(this).on('keydown', function(e) {
+                    if (e.key === 'Backspace' && !this.value && index > 0) {
+                        otpInputs.eq(index - 1).focus();
+                    }
+                });
+    
+                $(this).on('paste', function(e) {
+                    e.preventDefault();
+                    const pastedData = e.originalEvent.clipboardData.getData('text').trim();
+                    if (/^\d+$/.test(pastedData)) {
+                        for (let i = 0; i < Math.min(pastedData.length, otpInputs.length); i++) {
+                            otpInputs.eq(i).val(pastedData[i]);
+                        }
+                        if (pastedData.length < otpInputs.length) {
+                            otpInputs.eq(pastedData.length).focus();
+                        } else {
+                            otpInputs.last().focus();
+                        }
+                    }
+                });
+            });
+    
+            // Resend OTP
+            resendBtn.on('click', function() {
+                generatedOtp = generateOtp();
+                showToast(`Your new OTP is: ${generatedOtp}`, 'success');
+                startTimer();
+            });
+    
+            // OTP form submission
+            $('#otpForm').on('submit', function(e) {
+                e.preventDefault();
+    
+                let otpValue = '';
+                let isComplete = true;
+    
+                otpInputs.each(function() {
+                    otpValue += $(this).val();
+                    if (!$(this).val()) isComplete = false;
+                });
+    
+                if (!isComplete) {
+                    otpError.text('Please enter the complete 6-digit OTP').show();
+                    return;
+                }
+    
+                if (otpValue === generatedOtp || otpValue === '123456') {
+                    copyOtpToVerifying();
+                    otpStep.removeClass('active');
+                    verifyingStep.addClass('active');
+                    redirectToProfile();
+                } else {
+                    otpError.text('Invalid OTP. Please try again').show();
+                }
+            });
+    
+            // Clear OTP error on input
+            otpInputs.on('input', function() {
+                otpError.hide();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,634 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "poppins", sans-serif;
+    box-sizing: border-box;
+}
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+/* Navbar Styles from NOVA Plans Page */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    padding: 0.6rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+}
+
+.nav-link.active {
+    font-weight: bold;
+}
+
+.back-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 0.5rem 0;
+    cursor: pointer;
+}
+
+.back-link:hover {
+    color: #ccc; /* Optional: lighter color on hover */
+}
+
+.btn {
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.login-btn {
+    background-color: white;
+    color: black;
+}
+
+.login-btn:hover {
+    background-color: #0a21c0;
+    color: white;
+}
+
+.logout-btn {
+    background-color: white;
+    color: black;
+    font-size: 15px;
+}
+
+.logout-btn:hover {
+    background-color: white;
+}
+
+.user-avatar {
+    width: 35px;
+    height: 35px;
+    background-color: var(--primary-color, #0a21c0);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.user-avatar:hover {
+    transform: scale(1.1);
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Original My Plans Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    flex: 1;
+}
+h1 {
+    text-align: center;
+    color: #0a21c0;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+.section-title {
+    font-size: 1.5rem;
+    color: #0a21c0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #0a21c0;
+}
+.current-plan-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    padding: 25px;
+    margin-bottom: 40px;
+    border-left: 4px solid #0a21c0;
+}
+.current-plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.plan-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #0a21c0;
+}
+.plan-badge {
+    background-color: #0a21c0;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+.plan-expired {
+    background-color: #b3b4bd;
+}
+.plan-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.plan-detail {
+    flex: 1;
+    min-width: 200px;
+}
+.detail-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+.detail-value {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #222;
+}
+.price-value {
+    font-size: 1.3rem;
+    color: #0a21c0;
+    font-weight: 700;
+}
+.plan-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    gap: 10px;
+}
+.button {
+    padding: 10px 20px;
+    background-color: #0a21c0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+.button:hover {
+    background-color: #081a9d;
+    transform: translateY(-2px);
+}
+.button-secondary {
+    background-color: white;
+    color: #0a21c0;
+    border: 1px solid #0a21c0;
+}
+.button-secondary:hover {
+    background-color: #f0f3ff;
+}
+.usage-info {
+    margin-top: 15px;
+    display: flex;
+    gap: 20px;
+}
+.usage-item {
+    flex: 1;
+    border-left: 3px solid #b3b4bd;
+    padding-left: 10px;
+}
+.usage-label {
+    font-size: 0.9rem;
+    color: #555;
+}
+.usage-value {
+    font-weight: 600;
+    color: #222;
+}
+.previous-plans {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    overflow: hidden;
+    padding: 20px;
+}
+.plans-table-wrapper {
+    overflow-x: auto;
+}
+.plans-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1000px;
+}
+.plans-table th {
+    background-color: #f5f5f5;
+    color: #333;
+    font-weight: 600;
+    text-align: left;
+    padding: 15px;
+    border-bottom: 2px solid #e0e0e0;
+    white-space: nowrap;
+}
+.plans-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.plans-table tr:last-child td {
+    border-bottom: none;
+}
+.plans-table tr:hover {
+    background-color: #f8f9ff;
+}
+.highlight-row {
+    background-color: #f0f3ff;
+}
+.action-cell {
+    text-align: right;
+    white-space: nowrap;
+}
+.table-button {
+    padding: 8px 15px;
+    background-color: #0a21c0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+.table-button:hover {
+    background-color: #081a9d;
+}
+.plan-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    background-color: #f0f0f0;
+    color: #555;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-left: 5px;
+}
+.feature-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    background-color: #e0f7fa;
+    color: #00838f;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.feature-entertainment {
+    background-color: #f9fbe7;
+    color: #827717;
+}
+.feature-5g {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+.feature-data {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+}
+.benefit-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.benefit-list li {
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+.benefit-list li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #0a21c0;
+}
+.table-filters {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+.search-container {
+    flex: 1;
+    min-width: 250px;
+    position: relative;
+}
+.search-input {
+    width: 100%;
+    padding: 10px 15px 10px 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+.search-input:focus {
+    border-color: #0a21c0;
+    outline: none;
+}
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+}
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+.filter-item {
+    flex: 1;
+    min-width: 200px;
+}
+.filter-label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: #555;
+}
+.filter-select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+}
+.filter-select:focus {
+    border-color: #0a21c0;
+    outline: none;
+}
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+}
+.filter-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    background-color: #f0f3ff;
+    color: #0a21c0;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+.filter-tag.active {
+    background-color: #0a21c0;
+    color: white;
+}
+.hidden-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    opacity: 0.1;
+    width: 40px;
+    height: 40px;
+    background-color: #0a21c0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+.hidden-button:hover {
+    opacity: 1;
+}
+
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.pagination-button {
+    padding: 8px 12px;
+    background-color: #0a21c0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+.pagination-button:hover {
+    background-color: #081a9d;
+}
+.pagination-button:disabled {
+    background-color: #b3b4bd;
+    cursor: not-allowed;
+}
+.pagination-button.active {
+    background-color: #081a9d;
+    font-weight: 700;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.modal-header {
+    font-size: 1.2rem;
+    color: #0a21c0;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.modal-close:hover {
+    color: #0a21c0;
+}
+
+.modal-body {
+    margin-bottom: 20px;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.modal-input:focus {
+    border-color: #0a21c0;
+    outline: none;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.modal-button.cancel {
+    background-color: #f0f0f0;
+    color: #666;
+}
+
+.modal-button.cancel:hover {
+    background-color: #e0e0e0;
+}
+
+.modal-button.submit {
+    background-color: #0a21c0;
+    color: white;
+}
+
+.modal-button.submit:hover {
+    background-color: #081a9d;
+}
+
+@media (max-width: 768px) {
+    .plans-table thead {
+        display: none;
+    }
+    .plans-table, .plans-table tbody, .plans-table tr, .plans-table td {
+        display: block;
+        width: 100%;
+    }
+    .plans-table tr {
+        margin-bottom: 15px;
+        border-bottom: 2px solid #e0e0e0;
+    }
+    .plans-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        border-bottom: 1px solid #eee;
+    }
+    .plans-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        font-weight: 600;
+        text-align: left;
+    }
+    .action-cell {
+        text-align: center;
+    }
+    .plan-actions {
+        flex-direction: column;
+    }
+    .button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .table-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .search-container, .filter-item {
+        width: 100%;
+    }
+    .pagination {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+}

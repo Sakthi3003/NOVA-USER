@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova - Prepaid Recharge App</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Google Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" href="./assets/images/logo.webp" type="image/x-icon">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #000;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+        }
+        
+        .nav-link.active {
+            font-weight: bold;
+        }
+        
+        .back-link {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 0.5rem 0;
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            color: #ccc; /* Optional: lighter color on hover */
+        }
+
+        .btn {
+            border: none;
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .login-btn {
+            background-color: white;
+            color: black;
+        }
+
+        .login-btn:hover {
+            background-color: #0a21c0;
+            color: white;
+        }
+        
+        .logout-btn {
+            background-color: white;
+            color: black;
+        }
+
+        .logout-btn:hover {
+            background-color: white;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            background-color: var(--primary-color, #0a21c0);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .user-avatar:hover {
+            transform: scale(1.1);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: url('./assets/images/hero-section-img.webp') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 5%;
+        }
+
+        .hero-content {
+            background: transparent;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: left;
+            max-width: 600px;
+        }
+
+        .hero-content h2 {
+            font-weight: 600;
+            color: white;
+            margin-bottom: 20px;
+            font-size: 40px;
+        }
+
+        .hero-content h2 span {
+            color: #0a21c0;
+        }
+
+        .recharge-input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .recharge-input:hover, .recharge-input:focus {
+            border-color: #0a21c0;
+        }
+
+        .btn-recharge {
+            width: 30%;
+            background-color: #0a21c0;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-recharge:hover {
+            background-color: #08189b;
+        }
+
+        .error-message {
+            color: #ff3b30;
+            font-size: 14px;
+            display: none;
+            margin-top: 5px;
+        }
+
+        /* Popular Plans */
+        .popular-plans {
+            background-color: #141619;
+            padding: 50px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .popular-plans h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #ffffff, #0a21c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .plans-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Reduced from 300px to 250px */
+            gap: 15px; /* Reduced gap for compactness */
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .plan-card {
+            background: #ffffff;
+            color: #333;
+            padding: 15px; /* Reduced from 25px for smaller size */
+            border-radius: 12px; /* Slightly smaller radius */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Reduced shadow */
+            text-align: left;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            position: relative;
+            overflow: visible;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+            border: 1px solid #e0e0e0;
+        }
+
+        .plan-card:nth-child(1) { animation-delay: 0.2s; }
+        .plan-card:nth-child(2) { animation-delay: 0.4s; }
+        .plan-card:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Reduced shadow on hover */
+        }
+
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px; /* Reduced height */
+            background: linear-gradient(90deg, #0a21c0, #4a90e2);
+        }
+
+        .plan-card h3 {
+            font-size: 18px; /* Reduced from 22px */
+            margin-bottom: 12px; /* Reduced from 15px */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #333;
+            padding-top: 8px; /* Reduced from 10px */
+        }
+
+        .plan-card h3 i {
+            color: #0a21c0;
+            font-size: 22px; /* Reduced from 26px */
+        }
+
+        .plan-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px; /* Reduced gap for compactness */
+            margin-bottom: 12px; /* Reduced from 15px */
+            background: #f8f9fa;
+            padding: 8px; /* Reduced from 10px */
+            border-radius: 6px; /* Reduced from 8px */
+        }
+
+        .plan-detail {
+            flex: 1 1 100%; /* Stack details vertically on smaller screens by default */
+            display: flex;
+            align-items: center;
+            font-size: 15px; /* Reduced from 14px */
+            color: #666;
+        }
+
+        .plan-detail i {
+            margin-right: 6px; /* Reduced from 8px */
+            color: #0a21c0;
+            font-size: 14px; /* Reduced from 16px */
+        }
+
+        .plan-benefits {
+            margin-bottom: 12px; /* Reduced from 15px */
+        }
+
+        .plan-benefits ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .plan-benefits li {
+            font-size: 15px; /* Reduced from 14px */
+            color: black;
+            margin-bottom: 4px; /* Reduced from 5px */
+            display: flex;
+            align-items: center;
+        }
+
+        .plan-benefits li::before {
+            content: '✔';
+            color: #0a21c0;
+            margin-right: 6px; /* Reduced from 8px */
+        }
+
+        .plan-price {
+            font-size: 18px; /* Reduced from 20px */
+            font-weight: 600;
+            color: #0a21c0;
+            margin-bottom: 12px; /* Reduced from 15px */
+            text-align: center;
+            background: #e6f0ff;
+            padding: 4px; /* Reduced from 5px */
+            border-radius: 4px; /* Reduced from 5px */
+        }
+
+        .plan-card button {
+            background-color: #0a21c0;
+            color: white;
+            border: none;
+            padding: 8px 12px; /* Reduced from 10px 16px */
+            border-radius: 5px; /* Reduced from 6px */
+            font-size: 12px; /* Reduced from 14px */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .plan-card button:hover {
+            background-color: #08189b;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 50px 0;
+            background-color: white;
+        }
+
+        .features-section h2 {
+            color: black;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .feature-icon-small {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a21c0;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .feature-icon-small i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .feature-icon-small:hover {
+            transform: scale(1.1);
+        }
+
+        .features-section h4 {
+            font-size: 20px;
+            font-weight: 600;
+            color: black;
+            margin-top: 10px;
+        }
+
+        .features-section p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .btn-primary {
+            background: #0a21c0;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background: #08189b;
+            transform: scale(1.05);
+        }
+
+        /* About Us Section */
+        .about-us {
+            background-color: white;
+            color: black;
+            padding: 60px 0;
+        }
+
+        .text-primary {
+            color: #0a21c0 !important;
+        }
+
+        .rating i {
+            color: gold;
+            font-size: 1.5rem;
+        }
+
+        .counter {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .rating {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #141619, #000000);
+            color: white;
+            padding: 40px 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #0a21c0;
+        }
+
+        .footer-section p, .footer-section a {
+            font-size: 14px;
+            color: #b3b4bd;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .footer-social a {
+            font-size: 20px;
+            margin-right: 15px;
+            color: #b3b4bd;
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: #0a21c0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        .footer-bottom p {
+            font-size: 14px;
+            color: #b3b4bd;
+            margin: 0;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background-color: #000;
+                padding: 1rem;
+                gap: 1rem;
+                transform: translateY(-150%);
+                transition: transform 0.3s ease-in-out;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .hero-section {
+                height: auto;
+                padding: 50px 20px;
+            }
+            
+            .hero-content {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .hero-content h2 {
+                font-size: 28px;
+            }
+
+            .recharge-input, .btn-recharge {
+                width: 100%;
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .plans-section {
+                grid-template-columns: 1fr;
+            }
+
+            .about-us h1 {
+                font-size: 2.5rem;
+                text-align: center;
+            }
+
+            .about-us p {
+                text-align: center;
+            }
+
+            .counter, .rating {
+                text-align: center;
+                justify-content: center;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-social a {
+                margin: 0 10px;
+            }
+
+            .plan-details {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .plan-detail {
+                flex: 1 1 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h2 {
+                font-size: 24px;
+            }
+
+            .hero-section {
+                background-color: black;
+            }
+
+            .popular-plans h2 {
+                font-size: 24px;
+            }
+
+            .plan-card {
+                padding: 15px; /* Reduced further for very small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <a href="/" class="logo"><img src="./assets/images/logo.webp" alt="" height="40px" width="100px"></a>
+        <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        <div class="nav-links" id="nav-links">
+            <!-- Dynamically populated based on login status -->
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section d-flex">
+        <div class="hero-content">
+            <h2>POWER UP YOUR CONNECTION <span>ANYTIME, ANYWHERE</span></h2>
+            <input type="text" id="mobileNumber" class="recharge-input" placeholder="Enter Mobile Number">
+            <div id="errorMessage" class="error-message"></div>
+            <button class="btn-recharge" id="rechargeButton">Recharge Now</button>
+        </div>
+    </div>
+
+    <!-- Popular Plans -->
+    <section class="popular-plans py-5">
+        <div class="container">
+            <h2 class="text-center text-white mb-4">Discover Your Perfect Plan Today</h2>
+            <div class="plans-section">
+                <div class="plan-card" onclick="setCurrentPage('plans')">
+                    <h3>Unlimited Plan <i class="fas fa-infinity"></i></h3>
+                    <div class="plan-price">₹399</div>
+                    <div class="plan-details">
+                        <div class="plan-detail"><i class="fas fa-calendar-alt"></i> Validity: 28 Days</div>
+                        <div class="plan-detail"><i class="fas fa-mobile-alt"></i> Data: 2GB/Day</div>
+                        <div class="plan-detail"><i class="fas fa-sms"></i> SMS: 100/Day</div>
+                        <div class="plan-detail"><i class="fas fa-phone"></i> Calls: Unlimited</div>
+                    </div>
+                    <div class="plan-benefits">
+                        <ul>
+                            <li>Prime Video Subscription</li>
+                            <li>Weekend Data Rollover</li>
+                        </ul>
+                    </div>
+                    <button>View Plans</button>
+                </div>
+                <div class="plan-card" onclick="setCurrentPage('plans')">
+                    <h3>Data Pack <i class="fas fa-wifi"></i></h3>
+                    <div class="plan-price">₹249</div>
+                    <div class="plan-details">
+                        <div class="plan-detail"><i class="fas fa-calendar-alt"></i> Validity: No Expiry</div>
+                        <div class="plan-detail"><i class="fas fa-mobile-alt"></i> Data: 10GB Total</div>
+                        <div class="plan-detail"><i class="fas fa-sms"></i> SMS: N/A</div>
+                        <div class="plan-detail"><i class="fas fa-phone"></i> Calls: N/A</div>
+                    </div>
+                    <div class="plan-benefits">
+                        <ul>
+                            <li>Extra Data for Streaming</li>
+                            <li>Works with Any Plan</li>
+                        </ul>
+                    </div>
+                    <button>View Plans</button>
+                </div>
+                <div class="plan-card" onclick="setCurrentPage('plans')">
+                    <h3>Validity Pack <i class="fas fa-calendar-alt"></i></h3>
+                    <div class="plan-price">₹199</div>
+                    <div class="plan-details">
+                        <div class="plan-detail"><i class="fas fa-calendar-alt"></i> Validity: 56 Days</div>
+                        <div class="plan-detail"><i class="fas fa-mobile-alt"></i> Data: N/A</div>
+                        <div class="plan-detail"><i class="fas fa-sms"></i> SMS: N/A</div>
+                        <div class="plan-detail"><i class="fas fa-phone"></i> Calls: ₹199 Talktime</div>
+                    </div>
+                    <div class="plan-benefits">
+                        <ul>
+                            <li>Extend Plan Validity</li>
+                            <li>Talktime Included</li>
+                        </ul>
+                    </div>
+                    <button>View Plans</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section py-5">
+        <div class="container">
+            <h2 class="pb-2 border-bottom text-center">Why Choose NOVA?</h2>
+            <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
+                <div class="col d-flex flex-column align-items-start gap-3">
+                    <h2 class="fw-bold" style="color: black;">The Ultimate SIM & Recharge Experience</h2>
+                    <p class="text-secondary">NOVA delivers a seamless mobile recharge and SIM management experience, providing ultra-fast network connectivity and flexible data plans to suit your needs. Log in to track your transactions and stay connected effortlessly.</p>
+                    <a href="./login.html" class="btn btn-primary btn-lg">Get Started</a>
+                </div>
+                <div class="col">
+                    <div class="row row-cols-1 row-cols-sm-2 g-4">
+                        <div class="col d-flex flex-column gap-2">
+                            <div class="feature-icon-small d-inline-flex align-items-center justify-content-center bg-gradient fs-4 rounded-3" style="background-color: #0a21c0;">
+                                <i class="fas fa-signal"></i>
+                            </div>
+                            <h4 class="fw-semibold mb-0">4G & 5G Connectivity</h4>
+                            <p class="text-secondary">Enjoy ultra-fast internet speeds with our 4G and 5G network coverage.</p>
+                        </div>
+                        <div class="col d-flex flex-column gap-2">
+                            <div class="feature-icon-small d-inline-flex align-items-center justify-content-center bg-gradient fs-4 rounded-3" style="background-color: #0a21c0;">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <h4 class="fw-semibold mb-0">Affordable Plans</h4>
+                            <p class="text-secondary">Flexible recharge options to fit your budget.</p>
+                        </div>
+                        <div class="col d-flex flex-column gap-2">
+                            <div class="feature-icon-small d-inline-flex align-items-center justify-content-center bg-gradient fs-4 rounded-3" style="background-color: #0a21c0;">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4 class="fw-semibold mb-0">Instant Mobile Recharge</h4>
+                            <p class="text-secondary">Recharge your number within seconds using our fast & secure platform.</p>
+                        </div>
+                        <div class="col d-flex flex-column gap-2">
+                            <div class="feature-icon-small d-inline-flex align-items-center justify-content-center bg-gradient fs-4 rounded-3" style="background-color: #0a21c0;">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <h4 class="fw-semibold mb-0">Secure Transactions</h4>
+                            <p class="text-secondary">Your payments are protected with advanced encryption and security layers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about-us py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-lg-start text-center">
+                    <h1 class="display-3 fw-bold text-primary">ABOUT US</h1>
+                    <p class="lead text" style="color: #000;">Welcome to <strong>NOVA</strong>, your trusted prepaid recharge platform! We make mobile recharges <span class="text-primary">fast, secure, and hassle-free</span>.</p>
+                    <p class="text" style="color: #000;">Our mission is to provide a seamless recharge experience with <span class="text-primary">one-click payments</span>, <span class="text-primary">instant processing</span>, and <span class="text-primary">24/7 support</span> to keep you always connected.</p>
+                    <a href="#" class="btn btn-primary mt-3" onclick="setCurrentPage('support')">Contact Us</a>
+                    <div class="row text-center mt-5">
+                        <div class="col-md-4">
+                            <h2 id="totalCustomers" class="counter text-primary">0</h2>
+                            <p class="text" style="color: #000;">Happy Users</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h2 id="totalRecharges" class="counter text-primary">0</h2>
+                            <p class="text" style="color: #000;">Recharges Processed</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h2 id="avgRating" class="text-primary">0/5</h2>
+                            <div class="rating" id="ratingStars"></div>
+                            <p class="text" style="color: #000;">User Rating</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center mt-4 mt-lg-0">
+                    <img src="./assets/images/about.png" class="img-fluid rounded-4 shadow-lg" alt="About Us">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>About Nova SIM</h4>
+                <p>Nova SIM provides fast and secure prepaid recharge services to keep you connected anytime, anywhere.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a><br>
+                <a href="plans.html">Plans</a><br>
+                <a href="support.html">Support</a><br>
+                <a href="./login.html">Login</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: support@nova.com</p>
+                <p>Phone: +91 9876543210</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Mobi Comm Service Limited. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Pages configuration
+        const guestPages = [
+            { id: "home", label: "Home", url: "index.html" },
+            { id: "plans", label: "Plans", url: "plans.html" },
+            { id: "support", label: "Support", url: "support.html" }
+        ];
+
+        const loggedInPages = [
+            { id: "home", label: "Home", url: "indexu.html" },
+            { id: "plans", label: "Plans", url: "plansu.html" },
+            { id: "myplans", label: "My Plans", url: "myplans.html" },
+            { id: "transactions", label: "Transactions", url: "transaction.html" },
+            { id: "profile", label: "Profile", url: "profilef.html" },
+            { id: "support", label: "Support", url: "support.html" }
+        ];
+
+        let isLoggedIn = false;
+        let currentPage = "home";
+        let userInitials = "JS";
+
+        // Fetch user.json for validation (optional, if needed for future features)
+        async function fetchUsers() {
+            try {
+                const response = await fetch('./user.json');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user.json');
+                }
+                userData = await response.json();
+                console.log('Users fetched:', userData.users);
+            } catch (error) {
+                console.error('Error fetching user.json:', error);
+                userData = { users: [] };
+            }
+        }
+
+        // Generate navigation based on login status
+        function generateNavigation() {
+            const navLinks = document.getElementById("nav-links");
+            navLinks.innerHTML = "";
+            
+            // Check if user is logged in using localStorage
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            isLoggedIn = !!loggedInUser; // Set isLoggedIn based on whether user data exists
+         
+            const pages = isLoggedIn ? loggedInPages : guestPages;
+         
+            // Add Back button (only on non-home pages or as needed)
+           
+
+            pages.forEach(page => {
+                const link = document.createElement("a");
+                link.href = page.url;
+                link.className = `nav-link ${currentPage === page.id ? 'active' : ''}`;
+                link.textContent = page.label;
+                link.onclick = function(e) {
+                    e.preventDefault();
+                    setCurrentPage(page.id);
+                };
+                navLinks.appendChild(link);
+            });
+         
+            if (isLoggedIn) {
+                const logoutBtn = document.createElement("button");
+                logoutBtn.className = "btn logout-btn";
+                logoutBtn.textContent = "Logout";
+                logoutBtn.onclick = function() {
+                    logout();
+                };
+                navLinks.appendChild(logoutBtn);
+             
+                const avatar = document.createElement("div");
+                avatar.className = "user-avatar";
+                if (loggedInUser && loggedInUser.simHolderName) {
+                    avatar.textContent = loggedInUser.simHolderName.charAt(0).toUpperCase();
+                } else {
+                    avatar.textContent = "U"; // Default if no user name
+                }
+                avatar.onclick = function() {
+                    setCurrentPage("profile");
+                };
+                navLinks.appendChild(avatar);
+            } else {
+                const loginBtn = document.createElement("button");
+                loginBtn.className = "btn login-btn";
+                loginBtn.textContent = "Login";
+                loginBtn.onclick = function() {
+                    window.location.href = './login.html'; // Redirect to login page
+                };
+                navLinks.appendChild(loginBtn);
+            }
+        }
+
+        // Set current page and navigate
+        function setCurrentPage(pageId) {
+            currentPage = pageId;
+            const page = isLoggedIn ? loggedInPages.find(p => p.id === pageId) : guestPages.find(p => p.id === pageId);
+            if (page) {
+                window.location.href = page.url;
+            }
+            generateNavigation();
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('loggedInUser');
+            localStorage.removeItem('profileSetup');
+            sessionStorage.removeItem('phoneNumber');
+            isLoggedIn = false;
+            generateNavigation();
+            window.location.href = 'index.html'; // Redirect to home page (guest state)
+        }
+
+        // Back button functionality
+        function goBack() {
+            window.history.back();
+        }
+
+        // Toggle mobile menu
+        function toggleMenu() {
+            const navLinks = document.getElementById("nav-links");
+            navLinks.classList.toggle("active");
+        }
+
+        $(document).ready(function() {
+            // Fetch users (optional, for future validation if needed)
+            fetchUsers().then(() => {
+                // Check login status from localStorage
+                const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+                if (loggedInUser) {
+                    isLoggedIn = true;
+                    userInitials = loggedInUser.simHolderName ? loggedInUser.simHolderName.charAt(0).toUpperCase() : 'U';
+                }
+                generateNavigation();
+            });
+
+            // Mobile number validation on input
+            $('#mobileNumber').on('input', function() {
+                let mobileNumber = $(this).val().trim();
+                let errorMessage = $('#errorMessage');
+
+                // Allow only numeric input and limit to 10 digits
+                mobileNumber = mobileNumber.replace(/\D/g, '');
+                if (mobileNumber.length > 10) {
+                    mobileNumber = mobileNumber.substring(0, 10);
+                }
+                $(this).val(mobileNumber);
+
+                // Basic format validation
+                const mobileNumberPattern = /^[6789]\d{9}$/;
+                if (!mobileNumberPattern.test(mobileNumber)) {
+                    errorMessage.text('Please enter a valid 10-digit phone number starting with 6, 7, 8, or 9.');
+                    errorMessage.show();
+                } else {
+                    errorMessage.hide();
+                }
+            });
+
+            // Validate mobile number on button click and redirect to plans.html
+            $('#rechargeButton').on('click', function() {
+                const mobileNumber = $('#mobileNumber').val().trim();
+                const errorMessage = $('#errorMessage');
+
+                // Basic format validation
+                const mobileNumberPattern = /^[6789]\d{9}$/;
+                if (!mobileNumberPattern.test(mobileNumber)) {
+                    errorMessage.text('Please enter a valid 10-digit phone number starting with 6, 7, 8, or 9.');
+                    errorMessage.show();
+                    return;
+                }
+
+                errorMessage.hide();
+                sessionStorage.setItem('phoneNumber', mobileNumber);
+                setCurrentPage('plans');
+            });
+
+            // About Us Counters
+            const customers = [
+                { name: "Alice", recharges: 5, rating: 4.5 },
+                { name: "Bob", recharges: 10, rating: 5.0 },
+                { name: "Charlie", recharges: 7, rating: 4.8 },
+                { name: "David", recharges: 15, rating: 4.9 },
+                { name: "Emma", recharges: 8, rating: 4.2 }
+            ];
+
+            const totalCustomers = customers.length;
+            document.getElementById("totalCustomers").setAttribute("data-target", totalCustomers);
+
+            const totalRecharges = customers.reduce((sum, customer) => sum + customer.recharges, 0);
+            document.getElementById("totalRecharges").setAttribute("data-target", totalRecharges);
+
+            const avgRating = (customers.reduce((sum, customer) => sum + customer.rating, 0) / customers.length).toFixed(1);
+            document.getElementById("avgRating").innerText = avgRating + "/5";
+
+            const ratingStarsContainer = document.getElementById("ratingStars");
+            ratingStarsContainer.innerHTML = "";
+            const fullStars = Math.floor(avgRating);
+            const halfStar = avgRating % 1 !== 0 ? 1 : 0;
+            for (let i = 0; i < fullStars; i++) {
+                ratingStarsContainer.innerHTML += '<i class="bi bi-star-fill"></i>';
+            }
+            if (halfStar) {
+                ratingStarsContainer.innerHTML += '<i class="bi bi-star-half"></i>';
+            }
+
+            const counters = document.querySelectorAll(".counter");
+            counters.forEach(counter => {
+                counter.innerText = "0";
+                const updateCounter = () => {
+                    const target = +counter.getAttribute("data-target");
+                    const count = +counter.innerText;
+                    const increment = target / 100;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + increment);
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCounter();
+            });
+        });
+    </script>
+</body>
+</html>

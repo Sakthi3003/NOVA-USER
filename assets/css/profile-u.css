@@ -1,0 +1,722 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+:root {
+    --primary-color: #0a21c0;
+    --primary-light: rgba(10, 33, 192, 0.1);
+    --text-color: #000;
+    --bg-color: #fff;
+    --error-color: #ff3b30;
+    --success-color: #34c759;
+    --light-bg: #f6f7f9;
+    --border-color: #e1e5eb;
+    --hover-color: #081b9e;
+}
+
+body {
+    background-color: var(--light-bg);
+    color: var(--text-color);
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    padding: 0.6rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+}
+
+.nav-link.active {
+    font-weight: bold;
+}
+
+.btn {
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.logout-btn {
+    background-color: white;
+    color: black;
+    font-size: 15px;
+}
+
+.logout-btn:hover {
+    background-color: white;
+}
+
+.user-avatar {
+    width: 35px;
+    height: 35px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.user-avatar:hover {
+    transform: scale(1.1);
+}
+
+.navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.page-title {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.profile-card {
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1rem; /* Reduced margin for compactness */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem; /* Reduced margin */
+}
+
+.profile-img-container {
+    position: relative;
+    margin-right: 1rem; /* Reduced margin */
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 3px 10px rgba(10, 33, 192, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.05);
+}
+
+.change-photo {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: var(--primary-color);
+    color: white;
+    width: 25px; /* Reduced size */
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.change-photo:hover {
+    background-color: var(--hover-color);
+}
+
+.profile-header-info h2 {
+    margin-bottom: 0.2rem; /* Reduced margin */
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+.profile-header-info p {
+    color: #666;
+    font-size: 0.9rem; /* Slightly smaller for better fit */
+    margin-bottom: 0.2rem; /* Reduced margin */
+}
+
+.status-badge {
+    display: inline-block;
+    background-color: #34c759;
+    color: white;
+    font-size: 0.7rem; /* Slightly smaller */
+    padding: 0.15rem 0.4rem; /* Reduced padding */
+    border-radius: 18px; /* Slightly smaller radius */
+    margin-left: 0.5rem;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem; /* Reduced margin */
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem; /* Reduced padding */
+}
+
+.section-title {
+    font-size: 1.3rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem; /* Reduced gap */
+}
+
+.section-icon {
+    color: var(--primary-color);
+    width: 18px; /* Slightly smaller icon */
+    height: 18px;
+}
+
+.section-content {
+    padding: 0.5rem; /* Reduced padding */
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem; /* Reduced gap */
+}
+
+.info-item {
+    margin-bottom: 1rem; /* Reduced margin */
+    transition: transform 0.3s ease;
+    padding-left: 0.2rem; /* Reduced padding */
+}
+
+.info-item:hover {
+    transform: translateX(5px);
+}
+
+.info-label {
+    font-size: 0.85rem; /* Slightly smaller */
+    color: #666;
+    margin-bottom: 0.2rem; /* Reduced margin */
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem; /* Reduced gap */
+}
+
+.info-value {
+    font-size: 1rem; /* Slightly smaller */
+    color: var(--text-color);
+    padding: 0.3rem 0; /* Reduced padding */
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.form-group {
+    margin-bottom: 1rem; /* Reduced margin */
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem; /* Reduced margin */
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 0.9rem; /* Slightly smaller */
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.6rem; /* Reduced padding */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.9rem; /* Smaller font */
+    transition: all 0.3s;
+    background-color: var(--bg-color);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-light); /* Reduced shadow */
+}
+
+.submit-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.6rem 1.2rem; /* Reduced padding */
+    font-size: 0.9rem; /* Smaller font */
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem; /* Reduced gap */
+    margin-top: 0.8rem; /* Reduced margin */
+}
+
+.submit-btn:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(10, 33, 192, 0.2); /* Reduced shadow */
+}
+
+.error-message {
+    color: var(--error-color);
+    font-size: 0.8rem; /* Smaller font */
+    margin-top: 0.4rem; /* Reduced margin */
+    display: none;
+    animation: fadeIn 0.3s;
+}
+
+.success-message {
+    color: var(--success-color);
+    font-size: 0.9rem; /* Slightly smaller */
+    margin-top: 0.8rem; /* Reduced margin */
+    padding: 0.6rem; /* Reduced padding */
+    border-radius: 8px;
+    background-color: rgba(52, 199, 89, 0.1);
+    display: none;
+    text-align: center;
+    animation: fadeIn 0.5s;
+}
+
+.input-invalid {
+    border-color: var(--error-color);
+}
+
+.settings-card {
+    margin-top: 0.8rem; /* Reduced margin */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem; /* Reduced gap */
+}
+
+.account-field {
+    border-radius: 8px;
+    padding: 0.8rem; /* Reduced padding */
+    transition: all 0.3s;
+    position: relative;
+    background-color: #f8f9fa;
+    margin-bottom: 0.8rem; /* Reduced margin */
+}
+
+.account-field:hover {
+    background-color: #eef1f6;
+    transform: translateY(-2px);
+}
+
+.field-label {
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 0.4rem; /* Reduced margin */
+    font-size: 0.85rem; /* Slightly smaller */
+}
+
+.field-value {
+    font-size: 1rem; /* Slightly smaller */
+    color: var(--text-color);
+    word-break: break-word;
+}
+
+.edit-pencil {
+    position: absolute;
+    top: 0.8rem; /* Reduced position */
+    right: 0.8rem; /* Reduced position */
+    color: var(--primary-color);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.3s;
+}
+
+.edit-pencil:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Toast Message Styles */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--success-color);
+    color: white;
+    padding: 0.8rem 1.5rem; /* Reduced padding */
+    border-radius: 8px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15); /* Reduced shadow */
+    z-index: 1002;
+    animation: slideInToast 0.5s ease-out, fadeOutToast 0.5s ease-out 2.5s forwards;
+}
+
+@keyframes slideInToast {
+    from { opacity: 0; transform: translateX(100%); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeOutToast {
+    to { opacity: 0; }
+}
+
+/* Modern Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInOverlay 0.3s ease-out;
+}
+
+.modal {
+    background: var(--bg-color);
+    border-radius: 16px; /* Reduced from 20px */
+    padding: 1.5rem; /* Reduced from 2.5rem */
+    max-width: 450px; /* Reduced from 550px */
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+    position: relative;
+    overflow: hidden;
+    animation: slideInModal 0.5s ease-out;
+}
+
+.modal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px; /* Reduced from 6px */
+    background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 1.5rem; /* Reduced from 2rem */
+}
+
+.modal-title {
+    font-size: 1.5rem; /* Reduced from 2rem */
+    color: var(--primary-color);
+    margin-bottom: 0.6rem; /* Reduced from 0.75rem */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.modal-subtitle {
+    color: #555;
+    font-size: 0.9rem; /* Reduced from 1.1rem */
+    line-height: 1.5; /* Slightly tighter line height */
+    margin-bottom: 1rem; /* Reduced from 1.5rem */
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem; /* Reduced from 1rem */
+}
+
+.modal-button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.7rem 2rem; /* Reduced from 0.9rem 2.5rem */
+    border-radius: 25px; /* Reduced from 30px */
+    font-size: 0.9rem; /* Reduced from 1.1rem */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 12px rgba(10, 33, 192, 0.2); /* Reduced shadow */
+}
+
+.modal-button:hover {
+    background: var(--hover-color);
+    transform: translateY(-2px); /* Reduced from -3px */
+    box-shadow: 0 5px 15px rgba(10, 33, 192, 0.3); /* Reduced shadow */
+}
+
+.modal-button.secondary {
+    background: #f1f3f5;
+    color: var(--text-color);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1); /* Reduced shadow */
+}
+
+.modal-button.secondary:hover {
+    background: #e5e8eb;
+    transform: translateY(-2px); /* Reduced from -3px */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Reduced shadow */
+}
+
+@keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInModal {
+    from { opacity: 0; transform: translateY(50px); } /* Reduced from 60px */
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.8rem 1rem; /* Reduced padding for mobile */
+        flex-wrap: wrap;
+    }
+
+    .navbar-toggle {
+        display: block; /* Show hamburger menu */
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .nav-links {
+        display: none; /* Hide by default on mobile */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #000;
+        padding: 0.8rem; /* Reduced padding for compactness */
+        gap: 0.6rem; /* Further reduced gap */
+        max-height: 180px; /* Reduced height to make it more compact */
+        overflow-y: auto; /* Allow scrolling if content exceeds height */
+    }
+
+    .nav-links.active {
+        display: flex; /* Show when toggled */
+    }
+
+    .container {
+        padding: 0.5rem; /* Reduced padding */
+        margin: 1rem auto; /* Adjust margin for smaller screens */
+    }
+
+    .page-title {
+        font-size: 1.4rem; /* Slightly smaller title */
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-img-container {
+        margin-right: 0;
+        margin-bottom: 0.8rem; /* Reduced margin */
+    }
+
+    .profile-img {
+        width: 80px; /* Reduced from 100px */
+        height: 80px;
+    }
+
+    .profile-header-info h2 {
+        font-size: 1.2rem; /* Smaller header */
+    }
+
+    .profile-header-info p {
+        font-size: 0.8rem; /* Smaller text */
+    }
+
+    .status-badge {
+        margin-left: 0;
+        margin-top: 0.4rem; /* Reduced margin */
+        display: block; /* Stack badge below name on mobile */
+    }
+
+    .section-title {
+        font-size: 1.1rem; /* Smaller section title */
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr; /* Stack items vertically */
+        gap: 0.8rem; /* Reduced gap */
+    }
+
+    .settings-card {
+        grid-template-columns: 1fr; /* Stack fields vertically */
+        gap: 0.8rem; /* Reduced gap */
+    }
+
+    .profile-card {
+        padding: 0.8rem; /* Reduced padding */
+    }
+
+    .form-control {
+        padding: 0.5rem; /* Reduced padding */
+        font-size: 0.8rem; /* Smaller font */
+    }
+
+    .submit-btn {
+        padding: 0.5rem 1rem; /* Reduced padding */
+        font-size: 0.8rem; /* Smaller font */
+    }
+
+    .modal {
+        padding: 1.2rem; /* Reduced padding */
+        width: 90%; /* Maintain width but adjust padding */
+    }
+
+    .modal-title {
+        font-size: 1.3rem; /* Smaller title */
+    }
+
+    .modal-subtitle {
+        font-size: 0.8rem; /* Smaller subtitle */
+    }
+
+    .modal-button {
+        padding: 0.6rem 1.8rem; /* Reduced padding */
+        font-size: 0.8rem; /* Smaller font */
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0.6rem 0.8rem; /* Further reduce padding */
+    }
+
+    .logo {
+        font-size: 1rem; /* Smaller logo */
+    }
+
+    .nav-link {
+        padding: 0.2rem 0; /* Reduced padding */
+        font-size: 0.8rem; /* Smaller font */
+    }
+
+    .btn {
+        padding: 0.3rem 0.6rem; /* Reduced padding */
+        font-size: 0.8rem; /* Smaller font */
+    }
+
+    .user-avatar {
+        width: 25px; /* Reduced size */
+        height: 25px;
+    }
+
+    .page-title {
+        font-size: 1.2rem; /* Smaller title */
+    }
+
+    .profile-img {
+        width: 60px; /* Further reduced size */
+        height: 60px;
+    }
+
+    .profile-header-info h2 {
+        font-size: 1rem; /* Smaller header */
+    }
+
+    .profile-header-info p {
+        font-size: 0.7rem; /* Smaller text */
+    }
+
+    .section-title {
+        font-size: 0.9rem; /* Smaller section title */
+    }
+
+    .info-label {
+        font-size: 0.7rem; /* Smaller label */
+    }
+
+    .info-value {
+        font-size: 0.9rem; /* Smaller value */
+    }
+
+    .field-label {
+        font-size: 0.7rem; /* Smaller field label */
+    }
+
+    .field-value {
+        font-size: 0.9rem; /* Smaller field value */
+    }
+}

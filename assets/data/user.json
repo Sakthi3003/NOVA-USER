@@ -1,0 +1,76 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "simHolderName": "John Doe",
+        "number": "+91 9876543210",
+        "dateOfActivation": "12 Feb 2024",
+        "address": "Mumbai, India",
+        "dateOfBirth": "01 Jan 1995",
+        "username": "JohnDoe123",
+        "email": "johndoe@example.com",
+        "password": "hashed_password_1",
+        "role": "admin",
+        "status": "active",
+        "placeOfSupply":"TamilNadu"
+      },
+      {
+        "id": 2,
+        "simHolderName": "Jane Smith",
+        "number": "+91 8765432109",
+        "dateOfActivation": "15 Mar 2023",
+        "address": "Delhi, India",
+        "dateOfBirth": "10 Feb 1992",
+        "username": "abs",
+        "email": "dfdf",
+        "password": "eref",
+        "role": "user",
+        "status": "active",
+        "placeOfSupply":"TamilNadu"
+
+      },
+      {
+        "id": 3,
+        "simHolderName": "Rahul Kumar",
+        "number": "+91 7654321098",
+        "dateOfActivation": "20 Apr 2022",
+        "address": "Bangalore, India",
+        "dateOfBirth": "25 Dec 1990",
+        "username": "rahulkumar123",
+        "email": "rahul@gmail.com",
+        "password": "1234",
+        "role": "user",
+        "status": "active",
+        "placeOfSupply":"TamilNadu"
+      },
+      {
+        "id": 4,
+        "simHolderName": "Sakthisowmya T",
+        "number": "+91 9342593511",
+        "dateOfActivation": "20 Apr 2022",
+        "address": "Bangalore, India",
+        "dateOfBirth": "30 Dec 1990",
+        "username": "",
+        "email": "",
+        "password": "",
+        "role":"user",
+        "status": "active",
+        "placeOfSupply":"TamilNadu"
+      },
+      {
+        "id": 4,
+        "simHolderName": "Sakthisowmya T",
+        "number": "+91 9342593511",
+        "dateOfActivation": "30 Apr 2022",
+        "address": "Bangalore, India",
+        "dateOfBirth": "30 Dec 1990",
+        "username": "",
+        "email": "",
+        "password": "",
+        "role":"user",
+        "status": "active",
+        "placeOfSupply":"TamilNadu"
+      }
+    ]
+  }
+  

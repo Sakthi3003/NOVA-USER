@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA - Support</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- SweetAlert2 CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="icon" type="image/png" href="./assets/images/android-chrome-192x192.png">
+    <link rel="icon" href="./assets/images/logo.webp" type="image/x-icon">
+    <style>
+        /* General Styles */
+        body {
+            font-family: "poppins";
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 32px;
+            margin: 30px 0;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #0a21c0;
+        }
+
+        .section-heading {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .section-heading:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #0a21c0;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #000;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+        }
+        
+        .nav-link.active {
+            font-weight: bold;
+        }
+        
+        .back-link {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 0.5rem 0;
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            color: #ccc; /* Optional: lighter color on hover */
+        }
+
+        .btn {
+            border: none;
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .login-btn {
+            background-color: white;
+            color: black;
+        }
+
+        .login-btn:hover {
+            background-color: #0a21c0;
+            color: white;
+        }
+        
+        .logout-btn {
+            background-color: white;
+            color: black;
+        }
+
+        .logout-btn:hover {
+            background-color: white;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            background-color: var(--primary-color, #0a21c0);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .user-avatar:hover {
+            transform: scale(1.1);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Support Options */
+        .support-options {
+            margin-bottom: 40px;
+        }
+
+        .support-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .support-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .support-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e8f0ff;
+            border-radius: 50%;
+            color: #0a21c0;
+            font-size: 24px;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            margin-bottom: 50px;
+        }
+
+        .faq-search {
+            margin-bottom: 25px;
+        }
+
+        .faq-categories {
+            display: flex;
+            overflow-x: auto;
+            margin-bottom: 25px;
+            padding-bottom: 5px;
+            gap: 10px;
+        }
+
+        .faq-category {
+            padding: 8px 15px;
+            background-color: #f1f5ff;
+            border-radius: 20px;
+            color: #0a21c0;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .faq-category.active {
+            background-color: #0a21c0;
+            color: white;
+        }
+
+        .faq-category:hover:not(.active) {
+            background-color: #dde7fa;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            background: #f8f9ff;
+        }
+
+        .faq-question {
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding-top: 15px;
+            color: #666;
+            line-height: 1.6;
+            border-top: 1px solid #eee;
+            margin-top: 15px;
+        }
+
+        .feedback-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .feedback-button {
+            background: transparent;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .feedback-button:hover {
+            background-color: #f1f5ff;
+            border-color: #0a21c0;
+        }
+
+        .feedback-button.yes:hover {
+            background-color: #e6ffea;
+            border-color: #28a745;
+        }
+
+        .feedback-button.no:hover {
+            background-color: #fff1f0;
+            border-color: #dc3545;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+            padding: 20px;
+            min-width: 300px;
+        }
+
+        .contact-channels {
+            margin-top: 30px;
+        }
+
+        .contact-channel {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .channel-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #f1f5ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #0a21c0;
+        }
+
+        .channel-details h5 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .channel-details p {
+            margin: 5px 0 0;
+            color: #666;
+        }
+
+        .contact-form {
+            flex: 1;
+            padding: 20px;
+            min-width: 300px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #0a21c0;
+            box-shadow: 0 0 0 3px rgba(10, 33, 192, 0.1);
+        }
+
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-control.is-invalid + .invalid-feedback {
+            display: block;
+        }
+
+        .btn-primary {
+            background-color: #0a21c0;
+            border-color: #0a21c0;
+            padding: 12px 20px;
+            font-weight: 500;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #081894;
+            border-color: #081894;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #141619;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer a {
+            color: #b3b4bd;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .contact-section {
+                flex-direction: column;
+            }
+            
+            .contact-info, .contact-form {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .support-options .col-md-4 {
+                margin-bottom: 20px;
+            }
+
+            .navbar {
+                padding: 1rem 1.5rem; /* Reduce padding slightly */
+                flex-wrap: wrap;
+            }
+
+            .mobile-menu-btn {
+                display: block; /* Show hamburger menu only on mobile */
+                background: none;
+                border: none;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+
+            .nav-links {
+                display: none; /* Hide by default on mobile */
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: #000;
+                padding: 1rem; /* Reduced padding for compactness */
+                gap: 0.8rem; /* Smaller gap for compactness */
+                max-height: 200px; /* Limit height to prevent overflow */
+                overflow-y: auto; /* Allow scrolling if content exceeds height */
+            }
+
+            .nav-links.active {
+                display: flex; /* Show when toggled */
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu-btn {
+                display: none; /* Hide hamburger menu on desktop */
+            }
+
+            .nav-links {
+                display: flex; /* Ensure nav links are visible on desktop */
+            }
+        }
+
+        @media (max-width: 576px) {
+            h2 {
+                font-size: 24px;
+            }
+            
+            .contact-section {
+                padding: 25px 15px;
+            }
+            
+            .faq-categories {
+                flex-wrap: wrap;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .nav-link {
+                padding: 0.3rem 0;
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .user-avatar {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <a href="/" class="logo"><img src="./assets/images/logo.webp" alt="" height="40px" width="100px"></a>
+        <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        <div class="nav-links" id="nav-links">
+            <!-- Dynamically populated based on login status -->
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Support & Help Center</h2>
+
+        <!-- Support Options -->
+        <section class="support-options">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="support-card">
+                        <div class="support-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h4>Email Support</h4>
+                        <p>Send us your questions or concerns and we'll respond within 24 hours.</p>
+                        <a href="mailto:support@nova.com" class="btn btn-sm btn-outline-primary mt-3">Email Us</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="support-card">
+                        <div class="support-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h4>Documentation</h4>
+                        <p>Find detailed guides and tutorials in our knowledge base.</p>
+                        <a href="#faq-section" class="btn btn-sm btn-outline-primary mt-3">Browse FAQs</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="support-card">
+                        <div class="support-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h4>Community Forum</h4>
+                        <p>Connect with other users to get advice and share experiences.</p>
+                        <a href="#" class="btn btn-sm btn-outline-primary mt-3">Join Community</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="contact-info">
+                <h3 class="section-heading">Get in Touch</h3>
+                <p>Have a question or need assistance? Fill out this form and our support team will get back to you as soon as possible.</p>
+                
+                <div class="contact-channels">
+                    <div class="contact-channel">
+                        <div class="channel-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="channel-details">
+                            <h5>Email</h5>
+                            <p>support@nova.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-channel">
+                        <div class="channel-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="channel-details">
+                            <h5>Response Time</h5>
+                            <p>Within 24 hours</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <form id="supportForm" onsubmit="handleFormSubmit(event); return false;">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                        <div class="invalid-feedback" id="name-error">Please enter your name (at least 2 characters).</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="text" class="form-control" id="email" name="email">
+                        <div class="invalid-feedback" id="email-error">Please enter a valid email address.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject" class="form-label">Subject</label>
+                        <select class="form-control" id="subject" name="subject">
+                            <option value="" selected disabled>Select an issue type</option>
+                            <option value="billing">Billing Issue</option>
+                            <option value="technical">Technical Support</option>
+                            <option value="account">Account Management</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="invalid-feedback" id="subject-error">Please select an issue type.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="form-label">Your Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="5"></textarea>
+                        <div class="invalid-feedback" id="message-error">Please enter your message (at least 10 characters).</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Request</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-container" id="faq-section">
+            <h3 class="section-heading">Frequently Asked Questions</h3>
+            
+            <div class="faq-search">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="fas fa-search text-muted"></i>
+                    </span>
+                    <input type="text" class="form-control border-start-0" id="faqSearch" placeholder="Search FAQs...">
+                </div>
+            </div>
+            
+            <div class="faq-categories">
+                <div class="faq-category active" data-category="all">All</div>
+                <div class="faq-category" data-category="plans">Plans & Pricing</div>
+                <div class="faq-category" data-category="billing">Billing & Payment</div>
+                <div class="faq-category" data-category="technical">Technical Issues</div>
+                <div class="faq-category" data-category="sim">SIM & Devices</div>
+                <div class="faq-category" data-category="account">Account & Services</div>
+            </div>
+            
+            <div class="faq-list">
+                <!-- Plans & Pricing FAQs -->
+                <div class="faq-item" data-category="plans">
+                    <div class="faq-question">
+                        <span>Can I pause my plan temporarily?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Currently, we do not offer a feature to pause plans. However, you can switch to a lower plan if needed. Visit the Plans section to view available options or contact our customer support for assistance.</p>
+                        <div class="feedback-buttons">
+                            <button class="feedback-button yes"><i class="fas fa-thumbs-up me-1"></i> Helpful</button>
+                            <button class="feedback-button no"><i class="fas fa-thumbs-down me-1"></i> Not helpful</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="plans">
+                    <div class="faq-question">
+                        <span>How do I upgrade my current plan?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can upgrade your plan at any time through your account dashboard. Simply log in, go to the Plans section, and select "Upgrade Plan". The new plan will be activated immediately and you'll be charged the difference between your current plan and the new one.</p>
+                        <div class="feedback-buttons">
+                            <button class="feedback-button yes"><i class="fas fa-thumbs-up me-1"></i> Helpful</button>
+                            <button class="feedback-button no"><i class="fas fa-thumbs-down me-1"></i> Not helpful</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Billing & Payment FAQs -->
+                <div class="faq-item" data-category="billing">
+                    <div class="faq-question">
+                        <span>What payment methods are supported?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept multiple payment methods including credit/debit cards, UPI, net banking, and popular digital wallets. For recurring payments, you can set up auto-debit from your preferred payment method.</p>
+                        <div class="feedback-buttons">
+                            <button class="feedback-button yes"><i class="fas fa-thumbs-up me-1"></i> Helpful</button>
+                            <button class="feedback-button no"><i class="fas fa-thumbs-down me-1"></i> Not helpful</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="billing">
+                    <div class="faq-question">
+                        <span>How do I recharge my number?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can recharge your number in several ways:</p>
+                        <ul>
+                            <li>Through our website by logging into your account</li>
+                            <li>Using the NOVA mobile app</li>
+                            <li>Through third-party payment apps that support mobile recharges</li>
+                        </ul>
+                        <p>Recharges are typically processed instantly.</p>
+                        <div class="feedback-buttons">
+                            <button class="feedback-button yes"><i class="fas fa-thumbs-up me-1"></i> Helpful</button>
+                            <button class="feedback-button no"><i class="fas fa-thumbs-down me-1"></i> Not helpful</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Technical Issues FAQs -->
+                <div class="faq-item" data-category="technical">
+                    <div class="faq-question">
+                        <span>Why am I experiencing poor network connectivity?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Poor network connectivity can be caused by several factors:</p>
+                        <ul>
+                            <li>Location - You might be in an area with weak signal coverage</li>
+                            <li>Network congestion - During peak hours, many users might be connected</li>
+                            <li>Device issues - Your phone's antenna might be damaged or obstructed</li>
+                            <li>SIM card issues - Your SIM card might be damaged or incorrectly inserted</li>
+                        </ul>
+                        <p>Try restarting your phone, checking if your SIM is properly inserted, or moving to a different location.</p>
+                        <div class="feedback-buttons">
+                            <button class="feedback-button yes"><i class="fas fa-thumbs-up me-1"></i> Helpful</button>
+                            <button class="feedback-button no"><i class="fas fa-thumbs-down me-1"></i> Not helpful</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SIM & Devices FAQs -->
+                <div class="faq-item" data-category="sim">
+                    <div class="faq-question">
+                        <span>Is my phone compatible with your network?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Most unlocked phones sold in the last 5 years are compatible with our network. Your phone should support GSM technology and the frequency bands we use. You can check compatibility by:</p>
+                        <ul>
+                            <li>Entering your device IMEI in our compatibility checker tool</li>
+                            <li>Checking if your phone supports GSM and our frequency bands</li>
+                            <li>Contacting our support team with your device model information</li>
+                        </ul>
+                        <div class="feedback-buttons">
+                            <button class="feedback-button yes"><i class="fas fa-thumbs-up me-1"></i> Helpful</button>
+                            <button class="feedback-button no"><i class="fas fa-thumbs-down me-1"></i> Not helpful</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Account & Services FAQs -->
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">
+                        <span>How do I change my account information?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can update most of your account information through your account profile page after logging in. This includes:</p>
+                        <ul>
+                            <li>Contact information (email, address, alternate phone)</li>
+                            <li>Password and security settings</li>
+                            <li>Payment methods</li>
+                            <li>Communication preferences</li>
+                        </ul>
+                        <p>For changes to your name or primary phone number, please contact our support team with appropriate identification documents.</p>
+                        <div class="feedback-buttons">
+                            <button class="feedback-button yes"><i class="fas fa-thumbs-up me-1"></i> Helpful</button>
+                            <button class="feedback-button no"><i class="fas fa-thumbs-down me-1"></i> Not helpful</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 NOVA Telecommunications. All rights reserved.</p>
+            <div class="mt-2">
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SweetAlert2 Script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom Script -->
+    <script>
+        // Pages configuration
+        const guestPages = [
+            { id: "home", label: "Home", url: "index.html" },
+            { id: "plans", label: "Plans", url: "plans.html" },
+            { id: "support", label: "Support", url: "support.html" }
+        ];
+
+        const loggedInPages = [
+            { id: "home", label: "Home", url: "indexu.html" },
+            { id: "plans", label: "Plans", url: "plansu.html" },
+            { id: "myplans", label: "My Plans", url: "myplans.html" },
+            { id: "transactions", label: "Transactions", url: "transaction.html" },
+            { id: "profile", label: "Profile", url: "profilef.html" },
+            { id: "support", label: "Support", url: "support.html" }
+        ];
+
+        let isLoggedIn = false;
+        let currentPage = "support";
+        let userInitials = "JS";
+        let userData = null;
+
+        // Fetch user.json for validation (optional, if needed for future features)
+        async function fetchUsers() {
+            try {
+                const response = await fetch('./user.json');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user.json');
+                }
+                userData = await response.json();
+                console.log('Users fetched:', userData.users);
+            } catch (error) {
+                console.error('Error fetching user.json:', error);
+                userData = { users: [] };
+            }
+        }
+
+        // Generate navigation based on login status
+        function generateNavigation() {
+            const navLinks = document.getElementById("nav-links");
+            navLinks.innerHTML = "";
+            
+            // Check if user is logged in using localStorage
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            isLoggedIn = !!loggedInUser; // Set isLoggedIn based on whether user data exists
+         
+            const pages = isLoggedIn ? loggedInPages : guestPages;
+         
+            
+
+            pages.forEach(page => {
+                const link = document.createElement("a");
+                link.href = page.url;
+                link.className = `nav-link ${currentPage === page.id ? 'active' : ''}`;
+                link.textContent = page.label;
+                link.onclick = function(e) {
+                    e.preventDefault();
+                    setCurrentPage(page.id);
+                };
+                navLinks.appendChild(link);
+            });
+         
+            if (isLoggedIn) {
+                const logoutBtn = document.createElement("button");
+                logoutBtn.className = "btn logout-btn";
+                logoutBtn.textContent = "Logout";
+                logoutBtn.onclick = function() {
+                    logout();
+                };
+                navLinks.appendChild(logoutBtn);
+             
+                const avatar = document.createElement("div");
+                avatar.className = "user-avatar";
+                if (loggedInUser && loggedInUser.simHolderName) {
+                    avatar.textContent = loggedInUser.simHolderName.charAt(0).toUpperCase();
+                } else {
+                    avatar.textContent = "U"; // Default if no user name
+                }
+                avatar.onclick = function() {
+                    setCurrentPage("profile");
+                };
+                navLinks.appendChild(avatar);
+            } else {
+                const loginBtn = document.createElement("button");
+                loginBtn.className = "btn login-btn";
+                loginBtn.textContent = "Login";
+                loginBtn.onclick = function() {
+                    window.location.href = './login.html'; // Redirect to login page
+                };
+                navLinks.appendChild(loginBtn);
+            }
+        }
+
+        // Set current page and navigate
+        function setCurrentPage(pageId) {
+            currentPage = pageId;
+            const page = isLoggedIn ? loggedInPages.find(p => p.id === pageId) : guestPages.find(p => p.id === pageId);
+            if (page) {
+                window.location.href = page.url;
+            }
+            generateNavigation();
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('loggedInUser');
+            localStorage.removeItem('profileSetup');
+            sessionStorage.removeItem('phoneNumber');
+            isLoggedIn = false;
+            generateNavigation();
+            window.location.href = 'index.html'; // Redirect to home page (guest state)
+        }
+
+        // Back button functionality
+        function goBack() {
+            window.history.back();
+        }
+
+        // Toggle mobile menu
+        function toggleMenu() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Toggle FAQ answers
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const answer = this.querySelector('.faq-answer');
+                const icon = this.querySelector('.fa-chevron-down');
+                
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    answer.style.display = 'block';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // Filter FAQs by category
+        document.querySelectorAll('.faq-category').forEach(category => {
+            category.addEventListener('click', function() {
+                document.querySelectorAll('.faq-category').forEach(cat => {
+                    cat.classList.remove('active');
+                });
+                
+                this.classList.add('active');
+                
+                const selectedCategory = this.getAttribute('data-category');
+                
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (selectedCategory === 'all' || item.getAttribute('data-category') === selectedCategory) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Search FAQs
+        document.getElementById('faqSearch').addEventListener('keyup', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Validate individual input dynamically
+        function validateInput(input) {
+            const errorElement = document.getElementById(`${input.id}-error`);
+            let isValid = true;
+
+            if (input.id === 'name') {
+                const value = input.value.trim();
+                if (!value || value.length < 2) {
+                    input.classList.add('is-invalid');
+                    errorElement.style.display = 'block';
+                    isValid = false;
+                } else {
+                    input.classList.remove('is-invalid');
+                    errorElement.style.display = 'none';
+                }
+            } else if (input.id === 'email') {
+                const value = input.value.trim();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!value || !emailRegex.test(value)) {
+                    input.classList.add('is-invalid');
+                    errorElement.style.display = 'block';
+                    isValid = false;
+                } else {
+                    input.classList.remove('is-invalid');
+                    errorElement.style.display = 'none';
+                }
+            } else if (input.id === 'subject') {
+                const value = input.value;
+                if (!value) {
+                    input.classList.add('is-invalid');
+                    errorElement.style.display = 'block';
+                    isValid = false;
+                } else {
+                    input.classList.remove('is-invalid');
+                    errorElement.style.display = 'none';
+                }
+            } else if (input.id === 'message') {
+                const value = input.value.trim();
+                if (!value || value.length < 10) {
+                    input.classList.add('is-invalid');
+                    errorElement.style.display = 'block';
+                    isValid = false;
+                } else {
+                    input.classList.remove('is-invalid');
+                    errorElement.style.display = 'none';
+                }
+            }
+
+            return isValid;
+        }
+
+        // Add event listeners for dynamic validation
+        const inputs = document.querySelectorAll('#supportForm input, #supportForm select, #supportForm textarea');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => validateInput(input));
+            input.addEventListener('change', () => validateInput(input));
+        });
+
+        // Handle form submission with SweetAlert
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('supportForm');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const subjectInput = document.getElementById('subject');
+            const messageInput = document.getElementById('message');
+
+            // Validate all inputs
+            const isNameValid = validateInput(nameInput);
+            const isEmailValid = validateInput(emailInput);
+            const isSubjectValid = validateInput(subjectInput);
+            const isMessageValid = validateInput(messageInput);
+
+            const hasErrors = !(isNameValid && isEmailValid && isSubjectValid && isMessageValid);
+
+            if (!hasErrors) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Thank you! Our support team will contact you soon.',
+                    confirmButtonColor: '#0a21c0',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    form.reset();
+                    inputs.forEach(input => {
+                        input.classList.remove('is-invalid');
+                        const errorElement = document.getElementById(`${input.id}-error`);
+                        if (errorElement) {
+                            errorElement.style.display = 'none';
+                        }
+                    });
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please fill out all fields correctly before submitting.',
+                    confirmButtonColor: '#0a21c0'
+                });
+            }
+        }
+
+        // Logout functionality with SweetAlert
+        function logout() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Logged Out',
+                text: 'You have been successfully logged out.',
+                confirmButtonColor: '#0a21c0',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                localStorage.removeItem('loggedInUser');
+                localStorage.removeItem('profileSetup');
+                sessionStorage.removeItem('phoneNumber');
+                isLoggedIn = false;
+                generateNavigation();
+                window.location.href = 'index.html'; // Redirect to home page (guest state)
+            });
+        }
+
+        // Initialize dynamic navigation on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchUsers().then(() => {
+                const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+                if (loggedInUser) {
+                    isLoggedIn = true;
+                    userInitials = loggedInUser.simHolderName ? loggedInUser.simHolderName.charAt(0).toUpperCase() : 'U';
+                }
+                generateNavigation();
+
+                // Update logout button click handler to use the logout function
+                document.getElementById('logout-button').addEventListener('click', logout);
+            });
+        });
+    </script>
+</body>
+</html>
